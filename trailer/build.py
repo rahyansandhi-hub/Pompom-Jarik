@@ -33,7 +33,7 @@ EDL = [
     ("e3b", "20260922_121446_06f9ffd2-1a2b-4828-9f0f-d5613273fdeb", 1.6, 2.8, 0, 3, "Pom-Pom|dibanting."),
     ("e3c", "20260922_122056_4e685712-81e0-4854-88a5-6f734f288969", 1.0, 2.8, 0, 3, "Nyoba ramuannya...|malah menciut."),
     ("e4a", "20260924_150900_9bc8b31c-4a55-4c6c-a36f-dabf2cd29774", 5.6, 2.8, 0, 4, "Beli robot|pemburu tikus..."),
-    ("e4b", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 0.0, 1.55, 0, 4, "...robotnya|dibajak Jarik."),
+    ("e4b", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 0.0, 1.6, 0, 4, "...robotnya|dibajak Jarik."),
     ("e4c", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 4.4, 3.0, 0, 4, "Yang kesedot?|Pom-Pom."),
     ("e5a", "20260925_095652_17dbecd8-3c34-457c-928c-059117a0aab5", 3.2, 2.2, 1, 5, "Benteng bantal?|Disedot habis."),
     ("e5b", "20260925_095653_2d8cc21e-a046-4d11-aad3-ef6cfba690ed", 6.8, 3.0, 1, 5, "Kabur ke kulkas...|tetap kesedot."),
@@ -127,7 +127,7 @@ def make_overlay(name, ep, cap):
 def render_segment(i, seg):
     name, src, ss, dur, keep_audio, ep, cap = seg
     out = "seg/%02d_%s.mp4" % (i, name)
-    enc = "-r %d -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p -c:a aac -ar 48000 -ac 2 -b:a 192k -t %.3f" % (FPS, dur)
+    enc = "-r %d -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -c:a aac -ar 48000 -ac 2 -b:a 192k -t %.3f" % (FPS, dur)
     base = "scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d,fps=%d,setsar=1" % (W, H, W, H, FPS)
     first_of_ep = ep and EDL[i - 1][5] != ep
     flash = ",fade=in:st=0:d=0.18:color=white" if first_of_ep else ""
@@ -146,7 +146,6 @@ def render_segment(i, seg):
     else:
         vf = f"[0:v]{base},eq=saturation=1.08:contrast=1.03[b];{ovl};[b][o]overlay=0:0{flash}[v]"
         if keep_audio:
-            amap = "-map 0:a"
             extra = ""
             vf += ";[0:a]aresample=48000,aformat=channel_layouts=stereo,apad[a]"
             amap = "-map [a]"
@@ -294,23 +293,25 @@ def build_music(tl):
     chords = [(48, [72, 76, 79, 76, 74, 72, 67, None]), (45, [69, 72, 76, 72, 74, 76, 72, None]),
               (41, [77, 76, 72, 69, 72, 74, 76, None]), (43, [79, 77, 76, 74, 71, 74, 67, None])]
 
-    def groove_bar(tb, root, mel, stop, g=1.0):
+    gain = tl["gain"]  # < 1 where the clips carry their own score: keep only drums there
+
+    def groove_bar(tb, root, mel, stop):
         for (dt, fn, gg) in [(0, kick, 0.9), (1.0, kick, 0.9), (1.75, kick, 0.5), (0.5, snare, 0.6), (1.5, snare, 0.6)]:
             if tb + dt < stop:
-                add(fn(), tb + dt, gg * g)
+                add(fn(), tb + dt, gg * gain(tb + dt))
         for e in range(8):
             if tb + e * 0.25 < stop:
-                add(hat(), tb + e * 0.25, (0.28 if e % 2 else 0.18) * g)
+                add(hat(), tb + e * 0.25, (0.28 if e % 2 else 0.18) * gain(tb + e * 0.25))
         for dt, iv in [(0, 0), (0.5, 7), (1.0, 12), (1.5, 7)]:
-            if tb + dt < stop:
-                add(bass(root + iv, 0.42), tb + dt, 0.55 * g)
+            if tb + dt < stop and gain(tb + dt + 0.42) >= 1:
+                add(bass(root + iv, 0.42), tb + dt, 0.55)
         for e, m in enumerate(mel):
-            if m and tb + e * 0.25 < stop - 0.1:
-                add(ks(m, 0.45, 0.994), tb + e * 0.25, 0.5 * g)
+            if m and tb + e * 0.25 < stop - 0.1 and gain(tb + e * 0.25 + 0.45) >= 1:
+                add(ks(m, 0.45, 0.994), tb + e * 0.25, 0.5)
 
     tb, bar, ep7 = te, 0, tl["ep_starts"][6]
     while tb < ep7 - 0.1:
-        groove_bar(tb, *chords[bar % 4], stop=ep7 - 0.05, g=tl["gain"](tb))
+        groove_bar(tb, *chords[bar % 4], stop=ep7 - 0.05)
         tb += 2.0
         bar += 1
     for s in tl["ep_starts"][1:]:
@@ -324,17 +325,18 @@ def build_music(tl):
     rs = tl["riser_start"]
     tb, bar = ep7, 0
     while tb < rs - 0.05:
-        g = tl["gain"](tb)
+        g = gain(tb)
         for e, m in enumerate(heist[bar % 4]):
             t = tb + e * 0.25
             if t < rs:
-                add(bass(m - 12 if m > 50 else m, 0.22), t, 0.6 * g)
+                if g >= 1:
+                    add(bass(m - 12 if m > 50 else m, 0.22), t, 0.6)
                 add(hat(), t, (0.3 if e % 2 else 0.15) * g)
         for dt, fn, gg in [(0, kick, 0.9), (0.75, kick, 0.6), (1.0, kick, 0.9), (0.5, snare, 0.6), (1.5, snare, 0.6)]:
             if tb + dt < rs:
                 add(fn(), tb + dt, gg * g)
         for dt in [0.25, 1.25]:
-            if tb + dt < rs:
+            if tb + dt < rs and g >= 1:
                 for m in ([69, 72, 76] if bar % 4 < 2 else [62, 65, 69] if bar % 4 == 2 else [64, 68, 71]):
                     add(ks(m, 0.2, 0.98), tb + dt, 0.3 * g)
         tb += 2.0
