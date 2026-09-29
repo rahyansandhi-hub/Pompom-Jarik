@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Pompom & Jarik — trailer EP01-EP07 (9:16, untuk diposting @rahyansandhi).
+"""Pompom & Jarik — EP01-EP07 trailer (9:16, English, posted from @rahyansandhi).
 
-Menjalankan: python3 build.py   (butuh ffmpeg, numpy, Pillow, font Montserrat ExtraBold)
-Output: out/trailer_pompomjarik.mp4, out/trailer_tanpa_musik.mp4, out/cover.jpg
+Run: python3 build.py   (needs ffmpeg, numpy, Pillow, Montserrat ExtraBold font)
+Output: out/trailer_pompomjarik.mp4, out/trailer_no_music.mp4, out/cover.jpg
 """
 import json, os, subprocess, wave
 import numpy as np
@@ -14,8 +14,8 @@ W, H, FPS = 720, 1280, 30
 YELLOW, RED = (255, 212, 0), (235, 40, 60)
 
 EPISODES = {
-    1: "TOKO ROTI", 2: "SIRKUS", 3: "SUPERMARKET", 4: "ROBOT PENYEDOT",
-    5: "BALAS DENDAM", 6: "JEBAKAN GELAS", 7: "TAMU TENGAH MALAM",
+    1: "THE BAKERY", 2: "THE CIRCUS", 3: "THE SUPERMARKET", 4: "ROBO-VACUUM",
+    5: "PAYBACK", 6: "THE GLASS TRAP", 7: "MIDNIGHT GUEST",
 }
 
 # name, source clip, start (s), duration (s), keep native audio, episode, caption ("|" = line break)
@@ -23,29 +23,29 @@ EDL = [
     ("hookA", "20260921_053419_4d64eda4-e275-4e95-8a49-710b66d57630", 1.2, 1.6, 0, 0, ""),
     ("hookB", "20260921_053419_4d64eda4-e275-4e95-8a49-710b66d57630", 2.8, 1.7, 0, 0, ""),
     ("title", "20260921_235917_7e917414-23a9-4f95-ae54-be6c312b1ab5", 0.3, 3.2, 0, 0, ""),
-    ("e1a", "20260921_051324_6621759a-01a6-46a2-9f3f-a919e9030e23", 1.5, 2.6, 0, 1, "Jarik nemu ceri|raksasa..."),
-    ("e1b", "20260921_053419_3fa4785a-80d5-482d-b370-9ece9cb8bf30", 1.6, 3.0, 0, 1, "Jebakan tepung?|Kena sendiri."),
-    ("e1c", "20260921_053729_7808c3d2-167d-45e9-811b-90a5ae72f62a", 2.0, 3.0, 0, 1, "Ngumpet di mixer...|ikut diaduk."),
-    ("e2a", "20260921_235918_2d697d2f-f907-41c7-8d54-e22d29a70edc", 1.2, 2.6, 0, 2, "Salaman damai...|tapi jarinya nyilang."),
-    ("e2b", "20260922_001009_bb05a27f-ca77-48f9-b451-cd6cde60c7ec", 2.3, 3.6, 0, 2, "Jebakan sirkus|makan tuan."),
-    ("e2c", "20260921_235917_c4f265e2-f00e-42d0-843b-44aee6b72f94", 0.6, 2.6, 0, 2, "Yang masuk kandang:|Pom-Pom."),
-    ("e3a", "20260922_121446_40836902-e5b7-435d-87f3-bbdccc8287bc", 1.8, 2.8, 0, 3, "Susu ramuan bikin|Jarik... BEROTOT?!"),
-    ("e3b", "20260922_121446_06f9ffd2-1a2b-4828-9f0f-d5613273fdeb", 1.6, 2.8, 0, 3, "Pom-Pom|dibanting."),
-    ("e3c", "20260922_122056_4e685712-81e0-4854-88a5-6f734f288969", 1.0, 2.8, 0, 3, "Nyoba ramuannya...|malah menciut."),
-    ("e4a", "20260924_150900_9bc8b31c-4a55-4c6c-a36f-dabf2cd29774", 5.6, 2.8, 0, 4, "Beli robot|pemburu tikus..."),
-    ("e4b", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 0.0, 1.6, 0, 4, "...robotnya|dibajak Jarik."),
-    ("e4c", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 4.4, 3.0, 0, 4, "Yang kesedot?|Pom-Pom."),
-    ("e5a", "20260925_095652_17dbecd8-3c34-457c-928c-059117a0aab5", 3.2, 2.2, 1, 5, "Benteng bantal?|Disedot habis."),
-    ("e5b", "20260925_095653_2d8cc21e-a046-4d11-aad3-ef6cfba690ed", 6.8, 3.0, 1, 5, "Kabur ke kulkas...|tetap kesedot."),
-    ("e5c", "20260925_103050_9218d04f-8b60-4370-9a62-59e6912b798e", 3.3, 2.4, 1, 5, "Meledak dari|kantong debu!"),
-    ("e6a", "20260926_193925_731fdac4-03d2-43e7-bce5-48d60cbbbc93", 7.8, 3.8, 1, 6, "Akhirnya...|KETANGKEP!"),
-    ("e6b", "20260926_195025_906b70f4-8250-4f5c-af2e-648843ea3739", 5.2, 2.6, 1, 6, "Eh... Jarik|punya ide."),
-    ("e6c", "20260926_194732_8a89ceda-1b90-46b5-9d77-97030586de76", 2.2, 2.8, 1, 6, "Kalah lagi."),
-    ("e7a", "20260928_011259_ab133fde-0462-40d8-94e7-0a891ddaf4ce", 0.2, 3.4, 1, 7, "Tengah malam...|ada tamu."),
-    ("e7b", "20260928_011241_e7cfb403-17ee-44c6-9928-8e1f4958c07a", 1.7, 3.2, 1, 7, "Pai-nya|dihabisin."),
-    ("e7c", "20260928_011259_ab133fde-0462-40d8-94e7-0a891ddaf4ce", 7.6, 2.4, 1, 7, "Mangkok kesayangan|diembat!"),
-    ("e7d", "20260928_012312_cd580b1c-49eb-4659-8fd8-6b061517f92e", 1.0, 3.6, 1, 7, "Kucing & tikus...|GENCATAN SENJATA?!"),
-    ("e7e", "20260928_011241_1f39a12d-bc51-4364-aa31-94df7cdb7df9", 0.2, 2.8, 1, 7, "Operasi rebut|mangkok dimulai!"),
+    ("e1a", "20260921_051324_6621759a-01a6-46a2-9f3f-a919e9030e23", 1.5, 2.6, 0, 1, "Jarik finds a|giant cherry..."),
+    ("e1b", "20260921_053419_3fa4785a-80d5-482d-b370-9ece9cb8bf30", 1.6, 3.0, 0, 1, "A flour trap?|He trapped himself."),
+    ("e1c", "20260921_053729_7808c3d2-167d-45e9-811b-90a5ae72f62a", 2.0, 3.0, 0, 1, "Hiding in the mixer...|bad idea."),
+    ("e2a", "20260921_235918_2d697d2f-f907-41c7-8d54-e22d29a70edc", 1.2, 2.6, 0, 2, "A peace handshake...|fingers crossed."),
+    ("e2b", "20260922_001009_bb05a27f-ca77-48f9-b451-cd6cde60c7ec", 2.3, 3.6, 0, 2, "The circus trap|backfires."),
+    ("e2c", "20260921_235917_c4f265e2-f00e-42d0-843b-44aee6b72f94", 0.6, 2.6, 0, 2, "Guess who ends up|in the cage?"),
+    ("e3a", "20260922_121446_40836902-e5b7-435d-87f3-bbdccc8287bc", 1.8, 2.8, 0, 3, "Magic milk turns|Jarik... BUFF?!"),
+    ("e3b", "20260922_121446_06f9ffd2-1a2b-4828-9f0f-d5613273fdeb", 1.6, 2.8, 0, 3, "Pom-Pom gets|body-slammed."),
+    ("e3c", "20260922_122056_4e685712-81e0-4854-88a5-6f734f288969", 1.0, 2.8, 0, 3, "He tries the potion...|and shrinks."),
+    ("e4a", "20260924_150900_9bc8b31c-4a55-4c6c-a36f-dabf2cd29774", 5.6, 2.8, 0, 4, "He orders a robot|mouse hunter..."),
+    ("e4b", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 0.0, 1.6, 0, 4, "...Jarik hijacks|the robot."),
+    ("e4c", "20260924_150900_26bbe8fa-4ed2-4285-b6fd-c81b93422c4e", 4.4, 3.0, 0, 4, "Who gets sucked up?|Pom-Pom."),
+    ("e5a", "20260925_095652_17dbecd8-3c34-457c-928c-059117a0aab5", 3.2, 2.2, 1, 5, "Pillow fortress?|Vacuumed away."),
+    ("e5b", "20260925_095653_2d8cc21e-a046-4d11-aad3-ef6cfba690ed", 6.8, 3.0, 1, 5, "Flees to the fridge...|still sucked in."),
+    ("e5c", "20260925_103050_9218d04f-8b60-4370-9a62-59e6912b798e", 3.3, 2.4, 1, 5, "Bursting out of|the dust bag!"),
+    ("e6a", "20260926_193925_731fdac4-03d2-43e7-bce5-48d60cbbbc93", 7.8, 3.8, 1, 6, "Finally...|GOTCHA!"),
+    ("e6b", "20260926_195025_906b70f4-8250-4f5c-af2e-648843ea3739", 5.2, 2.6, 1, 6, "Wait... Jarik|has a plan."),
+    ("e6c", "20260926_194732_8a89ceda-1b90-46b5-9d77-97030586de76", 2.2, 2.8, 1, 6, "Lost. Again."),
+    ("e7a", "20260928_011259_ab133fde-0462-40d8-94e7-0a891ddaf4ce", 0.2, 3.4, 1, 7, "Midnight...|an uninvited guest."),
+    ("e7b", "20260928_011241_e7cfb403-17ee-44c6-9928-8e1f4958c07a", 1.7, 3.2, 1, 7, "The pie?|All gone."),
+    ("e7c", "20260928_011259_ab133fde-0462-40d8-94e7-0a891ddaf4ce", 7.6, 2.4, 1, 7, "His favorite bowl?|STOLEN!"),
+    ("e7d", "20260928_012312_cd580b1c-49eb-4659-8fd8-6b061517f92e", 1.0, 3.6, 1, 7, "Cat & mouse...|A TRUCE?!"),
+    ("e7e", "20260928_011241_1f39a12d-bc51-4364-aa31-94df7cdb7df9", 0.2, 2.8, 1, 7, "Operation:|Get The Bowl Back!"),
     ("cliff", None, 0, 1.2, 0, 0, ""),
     ("end", "20260928_020107_f088e908-3f45-4e8f-bd07-c1e6f5147359", 3.2, 4.8, 0, 0, ""),
 ]
@@ -97,28 +97,28 @@ def make_overlay(name, ep, cap):
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     if ep:
-        tag = "EPISODE %02d" % ep + ("  ·  TERBARU" if ep == 7 else "")
+        tag = "EPISODE %02d" % ep + ("  ·  NEW" if ep == 7 else "")
         pill(d, 190, tag, 28, YELLOW, "black")
         ctext(d, 240, EPISODES[ep], fit(EPISODES[ep], 62, 600))
         caption(d, cap)
     elif name == "hookA":
-        ctext(d, 250, "1 KUCING.", font(78))
-        ctext(d, 345, "1 TIKUS.", font(78))
+        ctext(d, 250, "1 CAT.", font(78))
+        ctext(d, 345, "1 MOUSE.", font(78))
     elif name == "hookB":
-        ctext(d, 250, "NOL KEMENANGAN", fit("NOL KEMENANGAN", 78, 600), fill=YELLOW)
-        ctext(d, 345, "buat si kucing.", fit("buat si kucing.", 60, 560))
+        ctext(d, 250, "ZERO WINS", fit("ZERO WINS", 78, 600), fill=YELLOW)
+        ctext(d, 345, "for the cat.", fit("for the cat.", 60, 560))
     elif name == "title":
-        pill(d, 175, "SERIES KOMEDI ANIMASI", 28, YELLOW, "black")
+        pill(d, 175, "ANIMATED COMEDY SERIES", 28, YELLOW, "black")
         ctext(d, 220, "POMPOM", fit("POMPOM", 130, 620), stroke=8)
         ctext(d, 360, "& JARIK", fit("& JARIK", 130, 620), fill=YELLOW, stroke=8)
     elif name == "cliff":
-        ctext(d, 560, "Berhasil nggak, ya...?", fit("Berhasil nggak, ya...?", 56, 600))
+        ctext(d, 560, "Will they pull it off...?", fit("Will they pull it off...?", 56, 600))
     elif name == "end":
-        pill(d, 330, "7 EPISODE SUDAH TAYANG", 32, YELLOW, "black")
-        ctext(d, 420, "Tonton series", font(60))
-        ctext(d, 500, "lengkapnya di", font(60))
+        pill(d, 330, "7 EPISODES OUT NOW", 32, YELLOW, "black")
+        ctext(d, 420, "Watch the full", font(60))
+        ctext(d, 500, "series on", font(60))
         ctext(d, 610, "@pompomjarik", fit("@pompomjarik", 92, 560), fill=YELLOW, stroke=8)
-        pill(d, 800, "FOLLOW SEKARANG", 40, RED, "white")
+        pill(d, 800, "FOLLOW NOW", 40, RED, "white")
         ctext(d, 880, "EP 01 – EP 07", font(34), stroke=4)
     im.save("ovl/%s.png" % name)
 
@@ -407,7 +407,7 @@ def main():
        f"\"[0:a]volume=1.1[a0];[1:a]volume=0.8[a1];[a0][a1]amix=inputs=2:normalize=0:duration=first,{loud}[a]\" "
        "-map 0:v -map [a] -c:v copy -c:a aac -b:a 192k -ar 48000 -movflags +faststart out/trailer_pompomjarik.mp4")
     sh(f"ffmpeg -nostdin -loglevel error -y -i all.mp4 -af {loud} -c:v copy -c:a aac -b:a 192k -ar 48000 "
-       "-movflags +faststart out/trailer_tanpa_musik.mp4")
+       "-movflags +faststart out/trailer_no_music.mp4")
     sh("ffmpeg -nostdin -loglevel error -y -ss %.2f -i out/trailer_pompomjarik.mp4 -frames:v 1 -q:v 2 out/cover.jpg"
        % (starts["title"] + 2.0))
     print("TOTAL %.2fs" % total)

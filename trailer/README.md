@@ -1,50 +1,44 @@
-# Trailer Pompom & Jarik — EP01 s/d EP07
+# Pompom & Jarik — EP01–EP07 Trailer (English)
 
-Trailer vertikal (9:16, 720×1280, 30fps, ±78 detik) untuk diposting di **@rahyansandhi**, mengarahkan penonton ke **@pompomjarik**.
+Vertical trailer (9:16, 720×1280, 30 fps, ~78 s) to be posted on **@rahyansandhi**, driving a global English-speaking audience to **@pompomjarik**.
 
-| File | Link |
-|---|---|
-| Trailer (dengan musik) | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/91399d70-8e06-4fbf-b37b-2c55fd405405.mp4 |
-| Trailer tanpa musik tambahan (untuk pakai sound trending di TikTok/IG) | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/8ba8061d-47d7-4a80-b242-255a80f7615b.mp4 |
-| Cover / thumbnail | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/ca4909ca-c537-4a9b-979c-d061891b48e0.jpg |
-
-Semua klip diambil dari generasi Higgsfield yang sudah ada; tidak ada generasi baru (0 kredit). Musik latar disintesis secara prosedural di `build.py` (bebas royalti).
+Output links are listed in the latest commit message / session summary (Higgsfield media library). All footage comes from existing Higgsfield generations — no new generations, 0 credits. The background score is synthesized procedurally in `build.py` (royalty-free).
 
 ## Storyboard
 
-| Waktu | Bagian | Teks di layar |
+| Time | Section | On-screen text |
 |---|---|---|
-| 0:00 | Hook (Pom-Pom nyungsep ke kue) | 1 KUCING. 1 TIKUS. → NOL KEMENANGAN buat si kucing. |
-| 0:03 | Judul (salam penonton di sirkus) | SERIES KOMEDI ANIMASI · POMPOM & JARIK |
-| 0:06 | EP01 Toko Roti | Jarik nemu ceri raksasa… / Jebakan tepung? Kena sendiri. / Ngumpet di mixer… ikut diaduk. |
-| 0:15 | EP02 Sirkus | Salaman damai… tapi jarinya nyilang. / Jebakan sirkus makan tuan. / Yang masuk kandang: Pom-Pom. |
-| 0:24 | EP03 Supermarket | Susu ramuan bikin Jarik… BEROTOT?! / Pom-Pom dibanting. / Nyoba ramuannya… malah menciut. |
-| 0:32 | EP04 Robot Penyedot | Beli robot pemburu tikus… / …robotnya dibajak Jarik. / Yang kesedot? Pom-Pom. |
-| 0:40 | EP05 Balas Dendam | Benteng bantal? Disedot habis. / Kabur ke kulkas… tetap kesedot. / Meledak dari kantong debu! |
-| 0:47 | EP06 Jebakan Gelas | Akhirnya… KETANGKEP! / Eh… Jarik punya ide. / Kalah lagi. |
-| 0:57 | EP07 Tamu Tengah Malam (terbaru) | Tengah malam… ada tamu. / Pai-nya dihabisin. / Mangkok kesayangan diembat! / Kucing & tikus… GENCATAN SENJATA?! / Operasi rebut mangkok dimulai! |
-| 1:12 | Cliffhanger (layar hitam) | Berhasil nggak, ya…? |
-| 1:13 | End card | 7 EPISODE SUDAH TAYANG · Tonton series lengkapnya di @pompomjarik · FOLLOW SEKARANG |
+| 0:00 | Hook (Pom-Pom face-plants into a cake) | 1 CAT. 1 MOUSE. → ZERO WINS for the cat. |
+| 0:03 | Title (circus bow) | ANIMATED COMEDY SERIES · POMPOM & JARIK |
+| 0:06 | EP01 The Bakery | Jarik finds a giant cherry… / A flour trap? He trapped himself. / Hiding in the mixer… bad idea. |
+| 0:15 | EP02 The Circus | A peace handshake… fingers crossed. / The circus trap backfires. / Guess who ends up in the cage? |
+| 0:24 | EP03 The Supermarket | Magic milk turns Jarik… BUFF?! / Pom-Pom gets body-slammed. / He tries the potion… and shrinks. |
+| 0:32 | EP04 Robo-Vacuum | He orders a robot mouse hunter… / …Jarik hijacks the robot. / Who gets sucked up? Pom-Pom. |
+| 0:40 | EP05 Payback | Pillow fortress? Vacuumed away. / Flees to the fridge… still sucked in. / Bursting out of the dust bag! |
+| 0:47 | EP06 The Glass Trap | Finally… GOTCHA! / Wait… Jarik has a plan. / Lost. Again. |
+| 0:57 | EP07 Midnight Guest (NEW) | Midnight… an uninvited guest. / The pie? All gone. / His favorite bowl? STOLEN! / Cat & mouse… A TRUCE?! / Operation: Get The Bowl Back! |
+| 1:12 | Cliffhanger (black) | Will they pull it off…? |
+| 1:13 | End card | 7 EPISODES OUT NOW · Watch the full series on @pompomjarik · FOLLOW NOW |
 
-Judul episode (Toko Roti, Sirkus, dst.) adalah judul deskriptif; ganti di `EPISODES` pada `build.py` bila judul resminya berbeda, lalu render ulang.
+Episode titles are descriptive; change `EPISODES` in `build.py` if the official titles differ, then re-render.
 
-## Caption posting (@rahyansandhi)
-
-```
-7 episode, 1 kucing, 1 tikus… dan Pom-Pom BELUM PERNAH MENANG 😭🐭🐱
-Episode 07 baru tayang — kali ini mereka terpaksa kerja sama?!
-
-Tonton series lengkapnya (EP01–EP07) di @pompomjarik 👉 follow biar nggak ketinggalan episode berikutnya!
-
-#pompomjarik #animasi #kartun #kucingvstikus #animasiindonesia #fyp
-```
-
-Tips: tag/collab @pompomjarik di postingan, dan sematkan komentar "Full episode ada di @pompomjarik 👆".
-
-## Render ulang
-
-Butuh ffmpeg, numpy, Pillow, dan font Montserrat ExtraBold (path di `FONT`). Script mengunduh klip dari CDN Higgsfield:
+## Post caption (@rahyansandhi)
 
 ```
-python3 build.py   # hasil di out/
+7 episodes. 1 cat. 1 mouse. And Pom-Pom has NEVER won. 😭🐱🐭
+Episode 7 just dropped — and this time they might have to team up?!
+
+Watch the full series (EP01–EP07) on @pompomjarik 👉 follow so you don't miss the next one!
+
+#pompomjarik #animation #cartoon #catandmouse #animatedseries #funnyanimals #fyp
+```
+
+Tip: add @pompomjarik as a collaborator / tag, and pin a comment: "Full episodes on @pompomjarik 👆".
+
+## Re-render
+
+Requires ffmpeg, numpy, Pillow and the Montserrat ExtraBold font (path in `FONT`). The script downloads the clips from the Higgsfield CDN:
+
+```
+python3 build.py   # output in out/
 ```
