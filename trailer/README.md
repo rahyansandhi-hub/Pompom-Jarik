@@ -2,7 +2,13 @@
 
 Vertical trailer (9:16, 720×1280, 30 fps, ~78 s) to be posted on **@rahyansandhi**, driving a global English-speaking audience to **@pompomjarik**.
 
-Output links are listed in the latest commit message / session summary (Higgsfield media library). All footage comes from existing Higgsfield generations — no new generations, 0 credits. The background score is synthesized procedurally in `build.py` (royalty-free).
+| File | Link |
+|---|---|
+| Trailer (with music) | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/436a7cce-c903-4633-9855-dfe0fe89bf33.mp4 |
+| Trailer without added music (to use a trending sound on TikTok/IG) | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/8844232d-0af9-4dab-874a-bb3f5d7a1582.mp4 |
+| Cover / thumbnail | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/125f8cfc-8ccc-4d0c-b54e-216898e1bb14.jpg |
+
+All footage comes from existing Higgsfield generations — no new generations, 0 credits. The background score is synthesized procedurally in `build.py` (royalty-free).
 
 ## Storyboard
 
