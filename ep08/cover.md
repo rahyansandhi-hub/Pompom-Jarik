@@ -4,8 +4,8 @@ Vertical 9:16 (2k), `gpt_image_2_5`, 4 variants:
 
 | Variant | Setting | Job |
 |---|---|---|
-| Night A | night living room (like EP07) | `768f8223-6ca6-4028-8e01-9689616d3592` |
-| Night B | night living room (like EP07) | `ab89316b-7e42-4a82-a53f-2a07b72e72bc` |
+| Night A | night living room (like EP07) | `768f8223-6ca6-4028-8e01-9689616d3592` — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260929_140533_768f8223-6ca6-4028-8e01-9689616d3592.png |
+| Night B | night living room (like EP07) | `ab89316b-7e42-4a82-a53f-2a07b72e72bc` — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260929_140535_ab89316b-7e42-4a82-a53f-2a07b72e72bc.png |
 | Day A | bright sunny living room | `e7dbfed4-eda6-4adf-bbc4-c1645a5338db` |
 | Day B | bright sunny living room | `0fef4067-0119-453a-8b93-55b165b0f623` |
 
