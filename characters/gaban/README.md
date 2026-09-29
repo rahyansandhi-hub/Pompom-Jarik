@@ -2,7 +2,9 @@
 
 The gentle giant. Pom-Pom's old friend, called in when Jimothy comes back from EP07 with two raccoon friends and Pom-Pom & Jarik are outnumbered 3 vs 2.
 
-Character sheet: https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260929_134033_464676a1-5413-42ce-9a7f-53edeeb598ad.png
+Character sheet (v2, long tail — current): https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260929_134624_51e43c39-3f06-4b5b-baab-159df92dc95a.png
+
+Character sheet v1 (shorter tail, superseded): https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260929_134033_464676a1-5413-42ce-9a7f-53edeeb598ad.png
 
 Visual reference: `Karakter_Maine_coon_GABAN.mp4` (a real brown/golden tabby Maine Coon walking toward the camera, then turning sideways, tail held high).
 
@@ -12,6 +14,7 @@ Visual reference: `Karakter_Maine_coon_GABAN.mp4` (a real brown/golden tabby Mai
 |---|---|
 | The only native American longhair breed, from the state of **Maine** (USA). It started as a farm and ship's cat and was valued as a tough mouser. It is Maine's official state cat. | Ship's-cat heritage → navy sailor neckerchief with an anchor charm. He is calm, practical and "has seen worse storms". |
 | Built for Maine winters: a water-resistant double coat, a thick **ruff** (mane) around the neck, **"snowshoe" paws** with fur tufts between the toes, **lynx tips** on the ears, and a very long bushy tail that it wraps around itself like a scarf. | His "armour" and his tools (see *Moves* below). |
+| A Maine Coon's tail is roughly as long as its body, and it often carries the tail upright when walking. | GABAN's tail is exaggerated a little for the screen, and it becomes his visual trademark. |
 | **Big and slow to mature.** Males usually weigh 6–8 kg (13–18 lb), can reach about 1 m from nose to tail tip, and only reach full size at 3–5 years. Long rectangular body, muscular, **not fat**. | Silhouette contrast: Pom-Pom = round, Jimothy = a ball, GABAN = long and tall. |
 | **"Gentle giant"** personality: friendly, patient, loyal like a dog, smart, playful all its life, rarely aggressive. | Doesn't pick fights. He ends them. |
 | Usually **chirps and trills** instead of meowing. | Comedy: a huge cat with a tiny "brrrp?" voice. He also uses the chirp as a team signal. |
@@ -30,7 +33,7 @@ Visual reference: `Karakter_Maine_coon_GABAN.mp4` (a real brown/golden tabby Mai
 - **Head:** slightly square muzzle, high cheekbones, long white whiskers, **amber-green eyes**.
 - **Ears:** very tall, with **long black lynx tips** and fur tufts inside.
 - **Paws:** oversized round "snowshoe" paws with tufts of fur between the toes.
-- **Tail:** extremely long plume with faint rings, **always held high like a flag** (as in the reference video).
+- **Tail — his signature beauty:** as long as his whole body (chest to hips), very thick and silky like a giant feather plume, faint darker rings. When he stands, it rises **straight up and reaches well above the top of his ears**, the tip curving forward like a question mark / ostrich plume (as in the reference video). In every standing shot the tail must be fully in frame and be the most striking part of the silhouette.
 - **Signature accessory:** a **faded navy-blue sailor neckerchief** knotted at the side, with a **small brass anchor charm**. It matches the others: Pom-Pom has a red collar with a gold bell, Jarik has a green scarf, Jimothy has a cream crossbody pouch.
 - **Walk:** slow, heavy and confident. Big paws land softly, the tail sways high, and the head is low and steady like a stalking lynx (see the reference video).
 
@@ -66,16 +69,22 @@ Coat note: the cat in the reference video has tortie/torbie-like patches (red an
 
 ## 6. Prompts (Higgsfield, model `gpt_image_2_5`)
 
-**Character sheet** (16:9, 2k, style reference = the Pom-Pom sheet `4f508284-646f-4028-b0c6-21fbf3d8105c`), job `464676a1-5413-42ce-9a7f-53edeeb598ad`:
+**Character sheet v1** (16:9, 2k, style reference = the Pom-Pom sheet `4f508284-646f-4028-b0c6-21fbf3d8105c`), job `464676a1-5413-42ce-9a7f-53edeeb598ad`:
 
 ```
 Character reference sheet of an original cat character, rendered in EXACTLY the same art style as the reference image (stylized photoreal 3D animation, soft cinematic lighting, plain warm light-grey studio background, same layout: full-body views on the left, facial expression close-ups on the right). Do NOT include the orange cat from the reference in this sheet. The character: GABAN, a huge adult male Maine Coon cat, a gentle giant: long, muscular, rectangular body with a broad chest and sturdy long legs (athletic and powerful, NOT fat), clearly much bigger and taller than an ordinary house cat. Coat: shaggy semi-long brown classic tabby with warm golden-ginger and russet tones, darker brown-grey tabby stripes on legs and back, a thick fluffy fiery golden-ginger lion-like mane ruff around the neck and chest, fluffy 'britches' on the back legs, a clear tabby 'M' marking on the forehead. Head: slightly square muzzle, high cheekbones, long white whiskers, big wise amber-green eyes, very tall wide-set ears with long black lynx-tip tufts and fur tufts inside the ears. Paws: oversized round 'snowshoe' paws with long tufts of fur between the toes. Tail: an enormous, very long, bushy plume-like tail with faint darker rings, carried proudly high and curled like a feather duster. Signature accessory: a faded navy-blue sailor neckerchief knotted at the side of the neck with a small brass anchor charm. Full-body front view, side view (showing the long body and the tall plume tail), three-quarter view and back view on the left; four facial expression close-ups on the right: calm wise slow-blink half smile, happy chirping with mouth slightly open, fierce protective glare with ears forward, playful curious head tilt. Ultra-detailed realistic fluffy fur, consistent design across all views, warm family-friendly animated short style, no text, no labels.
 ```
 
+**Character sheet v2 — long tail (current)**, reference = v1 job `464676a1-...`, job `51e43c39-3f06-4b5b-baab-159df92dc95a`:
+
+```
+Edit the reference character sheet: keep EXACTLY the same Maine Coon cat GABAN, same art style, same coat colors and tabby markings, same golden lion-like ruff, same lynx-tipped ears, same amber-green eyes, same faded navy sailor neckerchief with the small brass anchor charm, same plain warm light-grey background and same layout (full-body front, side, three-quarter and back views on the left; four facial expression close-ups on the right). The ONLY change: make his tail MUCH LONGER and more majestic. The tail is as long as his whole body from chest to hips, extremely thick and bushy like a giant feather plume, with long flowing silky fur and faint darker rings. When he stands, the tail rises straight up behind him and reaches well ABOVE the top of his ears, then curves gracefully forward at the tip like a question mark / ostrich plume, the long fur fanning out and catching the light. In the side view the full length of the tall upright tail is clearly visible and is the most striking feature of the silhouette. The tail stays fully inside the frame for every view. No text, no labels.
+```
+
 **Short description for scene prompts** (paste after "EXACTLY GABAN from the reference"):
 
 ```
-GABAN, the huge long-bodied brown-and-golden tabby Maine Coon with a fiery golden lion-like ruff, tall lynx-tipped ears, amber-green eyes, big snowshoe paws, an enormous plume tail held high, and a faded navy sailor neckerchief with a small brass anchor charm
+GABAN, the huge long-bodied brown-and-golden tabby Maine Coon with a fiery golden lion-like ruff, tall lynx-tipped ears, amber-green eyes, big snowshoe paws, an extremely long, body-length plume tail rising straight up well above his ears with the tip curving forward, and a faded navy sailor neckerchief with a small brass anchor charm
 ```
 
 ## Sources
