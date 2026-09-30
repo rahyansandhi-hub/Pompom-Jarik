@@ -318,6 +318,66 @@ def build_music(st, total):
         w.writeframes(pcm.tobytes())
 
 
+def snap():
+    t = tt(0.12)
+    return np.diff(rng.standard_normal(len(t)), prepend=0) * np.exp(-t * 45) * (1 + 0.6 * np.exp(-t * 400))
+
+
+def sub808(dur=0.5, f0=55.0):
+    t = tt(dur)
+    f = f0 * (1 + 1.5 * np.exp(-t * 40))
+    env = np.minimum(1, t / 0.003) * np.exp(-t * 3.5)
+    return np.tanh(2.2 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * env
+
+
+def build_bed(st, total):
+    """Thin viral-style TikTok groove (100 BPM trap/phonk drums: 808, snaps, rolling hats) — no pitched
+    melody, so it never clashes with the scene score. Royalty-free, generated here."""
+    out = np.zeros(int((total + 2) * SR))
+
+    def add(sig, t, g=1.0):
+        i = int(t * SR)
+        if 0 <= i < len(out):
+            j = min(len(out), i + len(sig))
+            out[i:j] += g * sig[:j - i]
+
+    beat = 0.6
+    t0, t1, bar = st[1], total - 1.0, 0
+    tb = t0
+    while tb < t1:
+        for dt, g in [(0, 1.0), (1.5 * beat, 0.8), (2.5 * beat, 0.7)]:
+            if tb + dt < t1:
+                add(sub808(0.5), tb + dt, g)
+        for dt in (beat, 3 * beat):
+            if tb + dt < t1:
+                add(snap(), tb + dt, 0.55)
+        step = beat / 4
+        for e in range(16):
+            tt_ = tb + e * step
+            if tt_ >= t1:
+                break
+            if bar % 4 == 3 and e >= 12:
+                for r in range(3):
+                    add(hat(), tt_ + r * step / 3, 0.25)
+            else:
+                add(hat(), tt_, 0.32 if e % 2 == 0 else 0.18)
+        tb += 4 * beat
+        bar += 1
+    out = out[:int(total * SR)]
+    fi, fo = int(0.5 * SR), int(1.0 * SR)
+    i0 = int(t0 * SR)
+    out[i0:i0 + fi] *= np.linspace(0, 1, fi)
+    out[-fo:] *= np.linspace(1, 0, fo)
+    out = np.tanh(out / (np.abs(out).max() + 1e-9) * 1.2)
+    out = out / np.abs(out).max() * 0.85
+    pcm = (np.repeat(out[:, None], 2, axis=1) * 32767).astype(np.int16)
+    with wave.open("bed.wav", "wb") as w:
+        w.setnchannels(2)
+        w.setsampwidth(2)
+        w.setframerate(SR)
+        w.writeframes(pcm.tobytes())
+
+
 # ---------------------------------------------------------------- main
 def main():
     for dn in ["src", "ovl", "seg", "out"]:
@@ -360,11 +420,15 @@ def main():
     sh("ffmpeg -nostdin -loglevel error -y -f concat -safe 0 -i list.txt -c:v copy -c:a aac -b:a 192k all.mp4")
 
     build_music(st, t)
+    build_bed(st, t)
     loud = "loudnorm=I=-14:TP=-1.5:LRA=11"
     # native SFX (yowl, splash...) stay on top; music sits under them, lower during the yowl (shot 5)
     duck = f"volume='if(between(t,{st[5]},{st[6]}),0.35,0.55)':eval=frame"
-    sh("ffmpeg -nostdin -loglevel error -y -i all.mp4 -i music.wav -filter_complex "
-       f"\"[0:a]volume=1.0[a0];[1:a]{duck}[a1];[a0][a1]amix=inputs=2:normalize=0:duration=first,{loud}[a]\" "
+    # thin viral-style groove bed: quiet, and dropped further under the yowl and the standoff
+    bduck = (f"volume='if(between(t,{st[5]},{st[6]})+between(t,{st[8]},{st[9]}),0.06,0.16)':eval=frame")
+    sh("ffmpeg -nostdin -loglevel error -y -i all.mp4 -i music.wav -i bed.wav -filter_complex "
+       f"\"[0:a]volume=1.0[a0];[1:a]{duck}[a1];[2:a]{bduck}[a2];"
+       f"[a0][a1][a2]amix=inputs=3:normalize=0:duration=first,{loud}[a]\" "
        "-map 0:v -map [a] -c:v copy -c:a aac -b:a 192k -ar 48000 -movflags +faststart out/ep08_gaban.mp4")
     sh(f"ffmpeg -nostdin -loglevel error -y -i all.mp4 -af {loud} -c:v copy -c:a aac -b:a 192k -ar 48000 "
        "-movflags +faststart out/ep08_gaban_no_music.mp4")
