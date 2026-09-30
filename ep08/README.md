@@ -1,11 +1,11 @@
 # Pompom & Jarik — EP08 "GABAN" (3 VS 3)
 
-Vertical video 9:16, **1080×1920 (Full HD)**, 30 fps, **60.9 s**, English captions, procedural background music (royalty-free), native SFX from each clip.
+Vertical video 9:16, **1080×1920 (Full HD)**, 30 fps, **66 s** (5 s EP07 flashback + 61 s EP08), English captions, procedural background music (royalty-free), native SFX from each clip.
 
 | File | Link |
 |---|---|
-| **EP08 final (with music)** | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/748ec5c7-1738-487c-95c2-70726af7aa25.mp4 |
-| EP08 without added music (for trending sounds) | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/1b6a8c4a-3748-4b3f-9a8c-fad83d3499e0.mp4 |
+| **EP08 final (with music)** | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/234f8ad3-377e-4fde-a988-afab7017f0d7.mp4 |
+| EP08 without added music (for trending sounds) | https://d2ol7oe51mr4n9.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/f26826a6-1a8f-4533-b028-3c15afa3c376.mp4 |
 | Cover | see `cover.md` (existing cover kept) |
 
 - Script: `script.md` · Production log and credits: `production.md` · Cover: `cover.md`
@@ -16,6 +16,7 @@ Vertical video 9:16, **1080×1920 (Full HD)**, 30 fps, **60.9 s**, English capti
 
 | Shot | Start | Captions / dialogue | Music |
 |---|---|---|---|
+| 0 (flashback) | 0:00 | `PREVIOUSLY ON EPISODE 07` · "Pom-Pom caught Jimothy... with a laundry basket!" — EP07 clip `1f39a12d`, faded warm tones + vignette, white flash into EP08 | soft music-box memory theme → whoosh |
 | 1 | 0:00 | `EPISODE 08 · GABAN` · "He lost in Episode 7..." → "...so he brought FRIENDS." | sneaky heist (A minor, pizzicato + walking bass) |
 | 2 | 0:05 | JIMOTHY: "Revenge... and snacks." | heist continues |
 | 3 | 0:11 | "Pom-Pom charges..." → "2 vs 3... TRAPPED." | tense drone + ticking |
