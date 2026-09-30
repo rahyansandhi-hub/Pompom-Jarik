@@ -11,7 +11,7 @@ Vertical 9:16 (2k), `gpt_image_2_5`, 4 variants:
 
 ## Daytime battle setting (EP08)
 
-Suggested flow: the raccoons break in at night (the opening, continuing from EP07), GABAN arrives at dawn, and the **3 VS 3 battle happens in the bright sunny living room** the next morning.
+Update: per `script.md`, the 3 VS 3 battle now happens **outside, in the garden and by the pond** at sunrise (not in the living room). The day-cover variant shows the living room, so a garden-and-pond cover may be needed.
 
 - **Visual:** GABAN's golden ruff and plume tail glow when backlit by the sun, which gives him a hero entrance. The raccoons stay in the curtains' shadow (cool tones), so warm vs cool reads clearly even in daylight.
 - **Real behaviour as comedy:** raccoons are nocturnal, so in daylight the gang is **sleepy and squinting** from the sun. GERALD is even lazier than usual and yawns nonstop. That's a natural reason the heroes can win.
