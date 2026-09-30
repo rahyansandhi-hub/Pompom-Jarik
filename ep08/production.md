@@ -46,7 +46,7 @@ The Higgsfield preset suggestion "IN THE DARK" was declined (no charge). Spoken 
 ### Shot 9 retake (user-approved option B)
 Problem in v1: Pom-Pom got swept up by GABAN's tail and fell into the pond too. Fix:
 - New end frame (3 raccoons in the pond, GABAN + Pom-Pom (dry) + Jarik on the pond edge): `6fb3b32a-a001-467e-bd9e-b7ce43a6bf7c` — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_052210_6fb3b32a-a001-467e-bd9e-b7ce43a6bf7c.png (2.75)
-- Video v2 (start + end frame locked, Pom-Pom jumps to the side before the sweep): `df234a8a-b9c3-46d9-9978-49469b429f6e` (20) — rendering
+- Video v2 (start + end frame locked, Pom-Pom jumps to the side before the sweep): `df234a8a-b9c3-46d9-9978-49469b429f6e` (20) — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_052317_df234a8a-b9c3-46d9-9978-49469b429f6e.mp4 (replaces v1 in the edit)
 
 ## Credit summary
 - Keyframes: 30.25 · Video: 150 · **Total: 180.25** (approved budget ≈ 180)
