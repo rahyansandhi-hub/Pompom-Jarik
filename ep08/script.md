@@ -70,13 +70,13 @@ One continuous team action, so the teamwork shows (not 1 vs 1):
 - **Visual:** the three heroes land side by side at the pond edge in a hero pose.
 - **Caption:** `TEAMWORK.`
 
-## Shot 10 — Victory and teaser (0:53–1:00)
+## Shot 10 — Victory (0:53–1:00)
 - **Visual:**
   - The three soaked raccoons climb out and run for the fence. Jimothy gets stuck in the gap in the fence (*POP!*), and NUGGET's backpack of stolen food is left behind.
   - GABAN wraps his tail around Pom-Pom and Jarik and gives a tiny *"brrrp"*.
   - Pom-Pom says: "We… WON?!" *(Kita… MENANG?!)*
-- **Teaser:** behind the fence, a wet Jimothy opens his notebook to "REVENGE PLAN #3".
-- **Caption:** `To be continued... Follow @pompomjarik`
+- **Score overlay (editing):** a scoreboard pops up with a "ding!": `POM-POM +1` · `JARIK +1`, because this is a win for both of them. This is the last raccoon revenge arc, so there is no teaser for a follow-up.
+- **Caption:** `Follow @pompomjarik`
 
 ---
 
