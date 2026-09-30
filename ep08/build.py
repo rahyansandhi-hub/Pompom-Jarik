@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pompom & Jarik — EP08 "GABAN" final edit (9:16, 60 s, English captions + score).
+"""Pompom & Jarik — EP08 "GABAN" final edit (9:16, 1080x1920, ~60 s, English captions + score).
 
 Run inside the Higgsfield sandbox: python3 build.py  (ffmpeg, numpy, Pillow, Montserrat)
 Output: out/ep08_gaban.mp4 (native SFX + music), out/ep08_gaban_no_music.mp4
@@ -10,7 +10,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 CDN = "https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_"
 FONT = "/usr/share/fonts/truetype/higgsfield/Montserrat-ExtraBold.ttf"
-W, H, FPS = 720, 1280, 30
+W, H, FPS = 1080, 1920, 30
+S = W / 720  # layout is written in 720-wide units and scaled to the output size
 YELLOW, RED, BLUE = (255, 212, 0), (235, 40, 60), (40, 150, 255)
 
 # shot, source clip, captions: (start, end, kind, text) relative to the shot
@@ -51,34 +52,35 @@ def probe(path):
 
 # ---------------------------------------------------------------- overlays
 def font(size):
-    return ImageFont.truetype(FONT, size)
+    return ImageFont.truetype(FONT, int(size * S))
 
 
 def fit(text, maxsize, maxw):
     s = maxsize
-    while s > 20 and font(s).getlength(text) > maxw:
+    while s > 20 and font(s).getlength(text) > maxw * S:
         s -= 2
     return font(s)
 
 
 def ctext(d, y, text, f, fill="white", stroke=6):
-    d.text(((W - f.getlength(text)) / 2, y), text, font=f, fill=fill, stroke_width=stroke, stroke_fill="black")
+    d.text(((W - f.getlength(text)) / 2, y * S), text, font=f, fill=fill, stroke_width=int(stroke * S), stroke_fill="black")
 
 
 def pill(d, yc, text, size, bg, fg):
     f = font(size)
     tw = f.getlength(text)
     a, b = f.getbbox(text)[1], f.getbbox(text)[3]
-    x0 = (W - tw) / 2 - 22
-    d.rounded_rectangle([x0, yc - (b - a) / 2 - 14, x0 + tw + 44, yc + (b - a) / 2 + 14],
-                        radius=(b - a) / 2 + 14, fill=bg, outline="black", width=4)
+    yc, px, py = yc * S, 22 * S, 14 * S
+    x0 = (W - tw) / 2 - px
+    d.rounded_rectangle([x0, yc - (b - a) / 2 - py, x0 + tw + 2 * px, yc + (b - a) / 2 + py],
+                        radius=(b - a) / 2 + py, fill=bg, outline="black", width=int(4 * S))
     d.text(((W - tw) / 2, yc - (b - a) / 2 - a), text, font=f, fill=fg)
 
 
 def lines_block(d, text, bottom, maxsize=50, maxw=600, fill="white"):
     ls = text.split("|")
     f = min((fit(l, maxsize, maxw) for l in ls), key=lambda f: f.size)
-    lh = int(f.size * 1.22)
+    lh = f.size * 1.22 / S
     y = bottom - lh * len(ls)
     for l in ls:
         ctext(d, y, l, f, fill=fill)
@@ -95,7 +97,8 @@ def overlay(kind, text, path):
         lines_block(d, text, 1010)
     elif kind.startswith("say:"):
         ls = text.split("|")
-        ls[0], ls[-1] = '"' + ls[0], ls[-1] + '"'
+        ls[0] = '"' + ls[0]
+        ls[-1] = ls[-1] + '"'
         top = lines_block(d, "|".join(ls), 1010)
         pill(d, top - 38, kind[4:], 26, YELLOW, "black")
     elif kind == "big":
@@ -104,13 +107,13 @@ def overlay(kind, text, path):
         y = 250
         for l in ls:
             ctext(d, y, l, f, fill=YELLOW, stroke=9)
-            y += int(f.size * 1.15)
+            y += f.size * 1.15 / S
     elif kind == "name":
         name, sub = text.split("|")
         ctext(d, 820, name, fit(name, 120, 620), fill=YELLOW, stroke=9)
         ctext(d, 960, sub, fit(sub, 34, 640), stroke=5)
     elif kind == "score":
-        d.rounded_rectangle([110, 190, 610, 470], radius=28, fill=(0, 0, 0, 170), outline=YELLOW, width=6)
+        d.rounded_rectangle([110 * S, 190 * S, 610 * S, 470 * S], radius=28 * S, fill=(0, 0, 0, 170), outline=YELLOW, width=int(6 * S))
         ctext(d, 212, "SCORE", font(40), fill=YELLOW, stroke=4)
         ctext(d, 280, "POM-POM  +1", font(62), stroke=6)
         ctext(d, 365, "JARIK  +1", font(62), stroke=6)
@@ -309,8 +312,9 @@ def main():
         f.write("\n".join(s[1] for s in SHOTS))
     sh(f"xargs -P 10 -I{{}} sh -c '[ -s src/{{}}.mp4 ] || curl -sfL -o src/{{}}.mp4 {CDN}{{}}.mp4' < dl.txt")
 
-    enc = f"-r {FPS} -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -c:a aac -ar 48000 -ac 2 -b:a 192k"
-    base = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},setsar=1"
+    enc = f"-r {FPS} -c:v libx264 -preset slow -crf 17 -profile:v high -pix_fmt yuv420p -c:a aac -ar 48000 -ac 2 -b:a 192k"
+    base = (f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},"
+            f"unsharp=5:5:0.6:5:5:0.0,fps={FPS},setsar=1")
     segs, st, t = [], {}, 0.0
     for n, src, caps in SHOTS:
         dur = probe(f"src/{src}.mp4")
@@ -320,7 +324,7 @@ def main():
         for j, (a, b, kind, text) in enumerate(caps):
             p = f"ovl/{n:02d}_{j}.png"
             overlay(kind, text, p)
-            inputs += f" -i {p}"
+            inputs += f" -loop 1 -t {dur:.3f} -i {p}"
             b = min(b, dur - 0.02)
             chain += (f";[{j + 1}:v]format=rgba,fade=in:st={a}:d=0.18:alpha=1,fade=out:st={b - 0.15}:d=0.15:alpha=1[o{j}]"
                       f";[{last}][o{j}]overlay=0:0:enable='between(t,{a},{b})'[v{j + 1}]")
