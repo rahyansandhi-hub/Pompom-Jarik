@@ -28,15 +28,35 @@ Balance before production: 288.81 · used so far: 11 keyframes = 30.25 credits (
 
 The Higgsfield preset suggestion "IN THE DARK" was declined (no charge). Spoken lines and captions go on screen during editing, because the clips are generated **without speech** so the lip-sync doesn't go wrong.
 
-| # | Duration | Credits | Job | Status |
+| # | Duration | Credits | Job | Video |
 |---|---|---|---|---|
-| 1 | 5 s | 12.5 | `f5e32b7d-2b70-4ac1-bed1-a6d7530f8f31` | rendering |
-| 2 | 6 s | 15 | `566186e6-9b63-433b-8533-5205ba3ae439` | done — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_566186e6-9b63-433b-8533-5205ba3ae439.mp4 |
-| 3 | 6 s | 15 | `43269443-fcfe-43c4-895b-55b1144c80d7` | done — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_43269443-fcfe-43c4-895b-55b1144c80d7.mp4 |
-| 4 | 6 s | 15 | `cd8abc6d-b6ef-44e1-a243-b32eaed35e5c` | done — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_cd8abc6d-b6ef-44e1-a243-b32eaed35e5c.mp4 |
-| 5 | 6 s | 15 | `e34fdbab-ae12-43ab-9f9a-2dcb4c1bb4a0` | done — https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_e34fdbab-ae12-43ab-9f9a-2dcb4c1bb4a0.mp4 |
-| 6 | 6 s | 15 | `9c328f39-c625-46a4-aebf-0539e9a32dd0` | rendering |
-| 7 | 5 s | 12.5 | `67ae5065-e15a-4b36-964b-90e8e9019b56` | rendering |
-| 8 | 5 s | 12.5 | `14da67a9-72e8-43a4-909b-cfe3cac4c282` | rendering |
-| 9 | 8 s | 20 | — | queued |
-| 10 | 7 s | 17.5 | — | queued |
+| 1 | 5 s | 12.5 | `f5e32b7d-2b70-4ac1-bed1-a6d7530f8f31` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050858_f5e32b7d-2b70-4ac1-bed1-a6d7530f8f31.mp4 |
+| 2 | 6 s | 15 | `566186e6-9b63-433b-8533-5205ba3ae439` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_566186e6-9b63-433b-8533-5205ba3ae439.mp4 |
+| 3 | 6 s | 15 | `43269443-fcfe-43c4-895b-55b1144c80d7` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_43269443-fcfe-43c4-895b-55b1144c80d7.mp4 |
+| 4 | 6 s | 15 | `cd8abc6d-b6ef-44e1-a243-b32eaed35e5c` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_cd8abc6d-b6ef-44e1-a243-b32eaed35e5c.mp4 |
+| 5 | 6 s | 15 | `e34fdbab-ae12-43ab-9f9a-2dcb4c1bb4a0` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050530_e34fdbab-ae12-43ab-9f9a-2dcb4c1bb4a0.mp4 |
+| 6 | 6 s | 15 | `c03ce66d-3fdb-4d59-9b73-748d9042e400` (the 1st attempt `9c328f39-…` was rejected by the "ip_detected" filter and its credits were refunded) | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_051314_c03ce66d-3fdb-4d59-9b73-748d9042e400.mp4 |
+| 7 | 5 s | 12.5 | `67ae5065-e15a-4b36-964b-90e8e9019b56` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050936_67ae5065-e15a-4b36-964b-90e8e9019b56.mp4 |
+| 8 | 5 s | 12.5 | `14da67a9-72e8-43a4-909b-cfe3cac4c282` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_050936_14da67a9-72e8-43a4-909b-cfe3cac4c282.mp4 |
+| 9 | 8 s | 20 | `6ae4714e-0e4b-49ba-bab0-e37509c8b42d` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_051142_6ae4714e-0e4b-49ba-bab0-e37509c8b42d.mp4 |
+| 10 | 7 s | 17.5 | `f82605bc-1dbd-4ab9-9854-4d9e34fc7faf` | https://d8j0ntlcm91z4.cloudfront.net/user_3JZP8inL1bd2xvdj2gSu8glteSA/hf_20260930_051215_f82605bc-1dbd-4ab9-9854-4d9e34fc7faf.mp4 |
+
+**Total video: 60 s = 150 credits.**
+
+## Credit summary
+- Keyframes: 30.25 · Video: 150 · **Total: 180.25** (approved budget ≈ 180)
+- Balance: 288.81 → **108.56**
+
+## Stage 3 — editing (overlays to add)
+| Time | Overlay |
+|---|---|
+| 0:00 | `He lost in EP07... so he brought FRIENDS.` |
+| 0:05 | Jimothy: "Revenge… and snacks." |
+| 0:11 | `2 vs 3... TRAPPED.` |
+| 0:17 | Pom-Pom: "GABAN… I need you. NOW." |
+| 0:23 | `THIS IS MY TERRITORY NOW.` |
+| 0:29 | Pom-Pom: "GABAAAN!" + `GABAN — Maine Coon. Pom-Pom's childhood friend.` |
+| 0:35 | GABAN: "Raccoons love water. Pond. Together. Ayuh." |
+| 0:40 | `3 VS 3` |
+| 0:45 | `TEAMWORK.` (after the splash) |
+| 0:53 | Pom-Pom: "We… WON?!" → scoreboard `POM-POM +1` · `JARIK +1` (ding!) → `Follow @pompomjarik` |
