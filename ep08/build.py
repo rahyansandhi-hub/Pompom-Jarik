@@ -16,7 +16,13 @@ YELLOW, RED, BLUE = (255, 212, 0), (235, 40, 60), (40, 150, 255)
 
 # shot, source clip, captions: (start, end, kind, text) relative to the shot
 #   kind: "cap" caption, "say:NAME" dialogue, "big" big centre title, "name" name card, "score", "follow"
+FLASHBACK_LOOK = ("eq=saturation=0.55:brightness=0.03:contrast=0.95,"
+                  "colorchannelmixer=.9:.25:.05:0:.2:.8:.1:0:.15:.2:.7,vignette=PI/4.5")
 SHOTS = [
+    # 0: flashback from EP07 — Pom-Pom flies with the laundry basket and traps Jimothy
+    (0, "20260928_011241_1f39a12d-bc51-4364-aa31-94df7cdb7df9",
+     [(0.0, 4.7, "ep", "PREVIOUSLY ON EPISODE 07"), (0.4, 4.6, "cap", "Pom-Pom caught Jimothy...|with a laundry basket!")],
+     {"ss": 0.2, "take": 5.5, "speed": 1.1, "look": FLASHBACK_LOOK, "flash_out": True, "vol": 0.7}),
     (1, "20260930_050858_f5e32b7d-2b70-4ac1-bed1-a6d7530f8f31",
      [(0.0, 5.0, "ep", "EPISODE 08 · GABAN"), (0.2, 2.6, "cap", "He lost in Episode 7..."),
       (2.6, 5.0, "cap", "...so he brought|FRIENDS.")]),
@@ -238,6 +244,14 @@ def build_music(st, total):
                     add(hat(), tb + dt, 0.22 * g)
             tb += 2.0
 
+    # 0) flashback: soft music-box memory theme, then a whoosh into the present
+    add(pad([48, 55, 64], st[1] - 0.2), 0.0, 0.6)
+    t, k = 0.0, 0
+    while t < st[1] - 0.6:
+        add(ks([72, 76, 79, 84, 79, 76][k % 6], 0.6, 0.997), t, 0.3)
+        t += 0.4
+        k += 1
+    add(noise_sweep(0.6), st[1] - 0.6, 0.3)
     # A) shots 1-2: sneaky heist in A minor (pizzicato + walking bass)
     walk = [45, 48, 50, 52, 45, 48, 51, 52]
     t, k = st[1], 0
@@ -316,11 +330,18 @@ def main():
     base = (f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},"
             f"unsharp=5:5:0.6:5:5:0.0,fps={FPS},setsar=1")
     segs, st, t = [], {}, 0.0
-    for n, src, caps in SHOTS:
-        dur = probe(f"src/{src}.mp4")
+    for n, src, caps, *rest in SHOTS:
+        o = rest[0] if rest else {}
+        sp = o.get("speed", 1.0)
+        dur = o["take"] / sp if "take" in o else probe(f"src/{src}.mp4")
         st[n] = t
         t += dur
-        inputs, chain, last = "", f"[0:v]{base}[v0]", "v0"
+        vpre = f"setpts=PTS/{sp}," if sp != 1.0 else ""
+        look = "," + o["look"] if "look" in o else ""
+        flash = f",fade=out:st={dur - 0.3:.3f}:d=0.3:color=white" if o.get("flash_out") else ""
+        apost = (f",atempo={sp}" if sp != 1.0 else "") + f",volume={o.get('vol', 1.0)}"
+        cut = f"-ss {o['ss']} -t {o['take']} " if "take" in o else ""
+        inputs, chain, last = "", f"[0:v]{vpre}{base}{look}{flash}[v0]", "v0"
         for j, (a, b, kind, text) in enumerate(caps):
             p = f"ovl/{n:02d}_{j}.png"
             overlay(kind, text, p)
@@ -330,8 +351,8 @@ def main():
                       f";[{last}][o{j}]overlay=0:0:enable='between(t,{a},{b})'[v{j + 1}]")
             last = f"v{j + 1}"
         out = f"seg/{n:02d}.mp4"
-        sh(f"ffmpeg -nostdin -loglevel error -y -i src/{src}.mp4{inputs} -filter_complex \"{chain};"
-           f"[0:a]aresample=48000,aformat=channel_layouts=stereo[a]\" -map [{last}] -map [a] {enc} -t {dur:.3f} {out}")
+        sh(f"ffmpeg -nostdin -loglevel error -y {cut}-i src/{src}.mp4{inputs} -filter_complex \"{chain};"
+           f"[0:a]aresample=48000,aformat=channel_layouts=stereo{apost}[a]\" -map [{last}] -map [a] {enc} -t {dur:.3f} {out}")
         segs.append(out)
     st[11] = t
     with open("list.txt", "w") as f:
